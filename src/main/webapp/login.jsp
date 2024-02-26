@@ -10,22 +10,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="login.css">
     </head>
     <body>
-        <h1>Login</h1>
-        
-        <div>
-            <li>
-                <span>Nombre de usuario:</span>
-                <input type="text">
-            </li>
-            <li>
-                <span>Contraseña:</span>
-                <input type="password">
-            </li>
-            
-            <input type="submit" value="Acceder">
-        </div>
-        <p>Aun no tienes cuenta? <a href="registroUsuario.jsp">Registrarse ahora</a></p>
-    </body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form class="login-form" method="post" action="TestServlet">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="action" value="login">
+                <input type="submit" value="login">
+                <label>No tienes cuenta? <a href="registroUsuario.jsp">Registrate</a></label>
+            </div>
+        </form>
+    </div>
+</body>
 </html>

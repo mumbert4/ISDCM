@@ -3,11 +3,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 26 feb 2024, 11:12:24
-    Author     : miquel
+    Created on : 26 feb 2024, 16:06:29
+    Author     : alumne
 */
 
-    body {
+ body {
             font-family: Arial, sans-serif;
             display: flex;
             align-items: center;
@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             background-color: #f4f4f4;
         }
 
-        .register-container {
+        .login-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -25,12 +25,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             width: 400px;
         }
 
-        .register-container h2 {
+        .login-container h2 {
             text-align: center;
             color: #333;
         }
 
-        .register-form {
+        .login-form {
             display: flex;
             flex-direction: column;
             margin-top: 20px;
@@ -58,3 +58,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             color: #fff;
             cursor: pointer;
         }
+        

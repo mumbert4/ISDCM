@@ -44,6 +44,34 @@ public class TestServlet extends HttpServlet {
             out.println("</html>");
         }
     }
+    
+     private void handleRegistration(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Obtener datos del formulario de registro
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String correo = request.getParameter("correo");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
+        System.out.println("TUMADRE register");
+        // Lógica de registro aquí (puedes almacenar los datos en una base de datos, por ejemplo)
+
+        // Redirigir a una página de éxito o error
+        response.sendRedirect("registroExitoso.html");
+    }
+
+    private void handleLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Obtener datos del formulario de login
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        System.out.println("TUMADRE login");
+        // Lógica de login aquí (verificar credenciales, por ejemplo)
+
+        // Redirigir a una página de éxito o error
+        response.sendRedirect("loginExitoso.html");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -75,7 +103,18 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        System.out.println(request.getParameterMap());
+        String action = request.getParameter("action");
+        System.out.println("Accion: " + action);
+        if ("register".equals(action)) {
+            handleRegistration(request, response);
+        } else if ("login".equals(action)) {
+            handleLogin(request, response);
+        } else {
+            System.out.println("TUMADRE no se ha detectado");
+            response.sendRedirect("index.html");
+        }
     }
 
     /**

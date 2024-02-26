@@ -9,42 +9,42 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Register</title>
         <link rel="stylesheet" href="registroUsuario.css"/>
-        <title>Login</title>
     </head>
     <body>
-        <h1 class="title">Registro usuarios</h1>
-        <div class="regForm">
-            <form action="TestServlet" method="post">
-                <ul class="regForm">
-                    <li class = "regForm">
-                        <span>Nombre:</span>
-                        <input type="text" name="name">
-                    </li>
-                    <li>
-                        <span>Apellidos:</span>
-                        <input type="text" name="surname">
-                    </li>
-                    <li>
-                        <span>Correo electrónico:</span>
-                        <input type="email" name="email">
-                    </li>
-                    <li>
-                        <span>Nombre usuario:</span>
-                        <input type="text" name="userName">
-                    </li>
-                    <li>
-                        <span>Contraseña:</span>
-                        <input type="password" name="password1">
-                    </li>
-                    <li>
-                        <span>Repetir contraseña:</span>
-                        <input type="password" name="password2">
-                    </li>
-                </ul> 
-                <input type="submit" value="Registrar usuario">
+        <div class="register-container">
+            <h2>Registro de Usuarios</h2>
+            <form class="register-form" method="post" action="TestServlet">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Nombre de Usuario:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Repetir Contraseña:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Registrarse">
+                    <label>Ya tienes una cuenta? <a href="login.jsp">Identificate</a></label>
+                </div>
             </form>
         </div>
-        <p>Ya estas registrado? <a href="login.jsp">Identificate</a></p>
-    </body>
+</body>
 </html>
