@@ -7,3 +7,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : miquel
 */
 
+.title{
+    justify-items: center;
+}
+
+
+.regForm{
+    background-color: grey;
+    align-content: center;
+    justify-content: center;
+}
+

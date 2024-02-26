@@ -57,7 +57,11 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String nombre = request.getParameter("name");
+        String email = request.getParameter("email");
+        
+        System.out.println(nombre + " " + email);
+        //processRequest(request, response);
     }
 
     /**
