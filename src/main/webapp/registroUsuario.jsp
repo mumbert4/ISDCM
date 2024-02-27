@@ -41,6 +41,7 @@
                     <input type="password" id="confirm-password" name="confirm-password" required>
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="action" value="register">
                     <input type="submit" value="Registrarse">
                     <label>Ya tienes una cuenta? <a href="login.jsp">Identificate</a></label>
                 </div>
