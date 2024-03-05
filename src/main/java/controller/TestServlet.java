@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Usuario;
 
 /**
  *
@@ -62,9 +63,13 @@ public class TestServlet extends HttpServlet {
         System.out.println("Nombre usuario: " + username);
         System.out.println("Password: " + password);
         System.out.println("Confirm Password: " + confirmPassword);
+        
+        
+        Usuario user = new Usuario(0,nombre, apellido, correo, username,password);
         // Lógica de registro aquí (puedes almacenar los datos en una base de datos, por ejemplo)
+        
 
-        // Redirigir a una página de éxito o error
+// Redirigir a una página de éxito o error
         //response.sendRedirect("registroExitoso.html");
     }
 
