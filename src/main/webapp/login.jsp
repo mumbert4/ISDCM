@@ -30,6 +30,18 @@
                 <label>No tienes cuenta? <a href="registroUsuario.jsp">Registrate</a></label>
             </div>
         </form>
+        
+        <%-- Verificar si hay un mensaje de error en la solicitud y mostrar el contenedor de errores --%>
+    <%
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+    %>
+        <div class="error-container">
+            <p><strong>Error:</strong> <%= error %></p>
+        </div>
+    <%
+        }
+    %>
     </div>
 </body>
 </html>

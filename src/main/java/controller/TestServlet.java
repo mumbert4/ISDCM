@@ -4,6 +4,7 @@
  */
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -56,16 +57,34 @@ public class TestServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
         
-        System.out.println("Usuario a registrar:");
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Apellido: " + apellido);
-        System.out.println("Correo: " + correo);
-        System.out.println("Nombre usuario: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Confirm Password: " + confirmPassword);
         
         
-        Usuario user = new Usuario(0,nombre, apellido, correo, username,password);
+        
+        Usuario user = new Usuario(3,nombre, apellido, correo, username,password);
+        Boolean existe = user.existeUsuario();
+        Boolean creado = user.crearUsuario();
+        
+        if(!password.equals(confirmPassword)){
+            request.setAttribute("error", "Las constraseñas no coinciden");
+            // Redirigir de nuevo al formulario de login
+            RequestDispatcher dispatcher = request.getRequestDispatcher("registroUsuario.jsp");
+            dispatcher.forward(request, response);
+        }
+        else if(existe){
+            request.setAttribute("error", "El nombre de usuario ya existe");
+            // Redirigir de nuevo al formulario de login
+            RequestDispatcher dispatcher = request.getRequestDispatcher("registroUsuario.jsp");
+            dispatcher.forward(request, response);
+        }
+        else if(!creado){
+            
+            System.out.println("Error al crear usuario, indice en la base de datos??");
+            request.setAttribute("error", "Error al crear usuario");
+            // Redirigir de nuevo al formulario de login
+            RequestDispatcher dispatcher = request.getRequestDispatcher("registroUsuario.jsp");
+            dispatcher.forward(request, response);
+            
+        } 
         // Lógica de registro aquí (puedes almacenar los datos en una base de datos, por ejemplo)
         
 
@@ -78,10 +97,30 @@ public class TestServlet extends HttpServlet {
         // Obtener datos del formulario de login
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("Usuario logeado:");
         
         System.out.println("Nombre usuario: " + username);
         System.out.println("Password: " + password);
+        
+        Usuario user = new Usuario(username, password);
+        Boolean existe = user.existeUsuario();
+        Boolean login = user.correctLogin();
+        if(login){
+            System.out.println("El usuario existe, login correcto");
+        }
+        
+        else if(!existe){
+            request.setAttribute("error", "Usuario no existe");
+            // Redirigir de nuevo al formulario de login
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
+        }
+        
+        else if(!login){
+            request.setAttribute("error", "Credenciales incorrectas");
+            // Redirigir de nuevo al formulario de login
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
+        }
         
         
     }

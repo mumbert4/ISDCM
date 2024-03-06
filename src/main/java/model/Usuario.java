@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -54,9 +55,17 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         
-        Boolean created = crearUsuario();
-        if(created)System.out.println("Usuario creado correctamente");
-        else System.out.println("Usuario no creado");
+        //Boolean created = crearUsuario();
+        
+    }
+    
+    
+      public Usuario(String nombreUsuario, String password){
+        this.nombre = null;
+        this.apellidos = null;
+        this.email = null;
+        this.nombreUsuario = nombreUsuario;
+        this.password = password;
     }
     
     
@@ -78,5 +87,45 @@ public class Usuario {
         }
         return result;
     }
+    
+    public boolean existeUsuario(){
+        boolean result = false;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "SELECT COUNT(*) as COUNT FROM " + TABLE + " WHERE username='" + this.nombreUsuario + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                result = (rs.getInt("COUNT") > 0);
+            }
+            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return result;
+        
+    }
+    
+    public boolean correctLogin(){
+        boolean result = false;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "SELECT COUNT(*) as COUNT FROM " + TABLE + " WHERE username='" + this.nombreUsuario + "' AND password='" + this.password+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                result = (rs.getInt("COUNT") > 0);
+            }
+            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return result;
+        
+    }
+    
+ 
     
 }

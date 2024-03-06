@@ -46,6 +46,18 @@
                     <label>Ya tienes una cuenta? <a href="login.jsp">Identificate</a></label>
                 </div>
             </form>
+            
+            
+            <%
+                String error = (String) request.getAttribute("error");
+                if (error != null) {
+            %>
+                <div class="error-container">
+                    <p><strong>Error:</strong> <%= error %></p>
+                </div>
+            <%
+                }
+            %>
         </div>
 </body>
 </html>
