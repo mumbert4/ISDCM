@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 import model.Usuario;
 
 /**
@@ -106,6 +108,12 @@ public class TestServlet extends HttpServlet {
         Boolean login = user.correctLogin();
         if(login){
             System.out.println("El usuario existe, login correcto");
+            HttpSession session = request.getSession();
+            
+            session.setAttribute("username",username);
+            //response.sendRedirect("listadoVideos.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("listadoVideos.jsp");
+            dispatcher.forward(request, response);
         }
         
         else if(!existe){
