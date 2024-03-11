@@ -45,10 +45,10 @@ public class Usuario {
         this.password =null;
     }
     
-    public Usuario(int id, String nombre, String apellidos, String email, String nombreUsuario, String password){
+    public Usuario(String nombre, String apellidos, String email, String nombreUsuario, String password){
         
         System.out.println("Cargando nuevo usuario: " + nombre + " - " + apellidos);
-        this.id = id;
+        
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -76,8 +76,8 @@ public class Usuario {
             Statement stmt = conn.createStatement();
             
             String sql = "INSERT INTO " + TABLE
-                    + "(id, nombre, apellido, correo, username, password)"
-                   + " VALUES ('" + this.id + "', '" + this.nombre + "', '" + this.apellidos + "', '" + this.email + "', '" + this.nombreUsuario + "', '" + this.password + "')";
+                    + "( nombre, apellido, correo, username, password)"
+                   + " VALUES ('" + this.nombre + "', '" + this.apellidos + "', '" + this.email + "', '" + this.nombreUsuario + "', '" + this.password + "')";
             System.out.println("Sentencia SQL: " + sql);
             stmt.executeUpdate(sql);
             

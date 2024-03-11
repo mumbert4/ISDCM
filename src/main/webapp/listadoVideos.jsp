@@ -20,6 +20,7 @@
 
         </div>
         <button id="btnAddVideo" class="add-button">Añadir nuevo video</button>
+        <a href="subirVideo.jsp" class="add-button">Añadir nuevo video</a>
 
         <h2>Listado de Videos</h2>
         <table>

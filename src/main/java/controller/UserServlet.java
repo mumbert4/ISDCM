@@ -21,7 +21,7 @@ import model.Usuario;
  * @author alumne
  */
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
-public class TestServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,7 +62,7 @@ public class TestServlet extends HttpServlet {
         
         
         
-        Usuario user = new Usuario(3,nombre, apellido, correo, username,password);
+        Usuario user = new Usuario(nombre, apellido, correo, username,password);
         Boolean existe = user.existeUsuario();
         Boolean creado = user.crearUsuario();
         
@@ -87,6 +87,15 @@ public class TestServlet extends HttpServlet {
             dispatcher.forward(request, response);
             
         } 
+        else{
+            
+            HttpSession session = request.getSession();
+            
+            session.setAttribute("username",username);
+            //response.sendRedirect("listadoVideos.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("listadoVideos.jsp");
+            dispatcher.forward(request, response);
+        }
         // Lógica de registro aquí (puedes almacenar los datos en una base de datos, por ejemplo)
         
 
