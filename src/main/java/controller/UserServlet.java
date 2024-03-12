@@ -13,14 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 //import jakarta.servlet.http.HttpSession;
 import model.Usuario;
+import model.Video;
 
 /**
  *
  * @author alumne
  */
-@WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/UserServlet"})
 public class UserServlet extends HttpServlet {
 
     /**
@@ -92,6 +94,7 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             session.setAttribute("username",username);
+            session.setAttribute("userID", user.getId());
             //response.sendRedirect("listadoVideos.jsp");
             RequestDispatcher dispatcher = request.getRequestDispatcher("listadoVideos.jsp");
             dispatcher.forward(request, response);
@@ -120,6 +123,10 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             session.setAttribute("username",username);
+            session.setAttribute("userID", user.getId());
+            Video aux = new Video();
+            ArrayList<Video> videos = aux.getVideos(user.getId());
+            session.setAttribute("userVideos", videos);
             //response.sendRedirect("listadoVideos.jsp");
             RequestDispatcher dispatcher = request.getRequestDispatcher("listadoVideos.jsp");
             dispatcher.forward(request, response);

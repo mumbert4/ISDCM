@@ -15,7 +15,7 @@
     <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form class="login-form" method="post" action="TestServlet">
+        <form class="login-form" method="post" action="UserServlet">
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" required>

@@ -126,6 +126,27 @@ public class Usuario {
         
     }
     
+    public int getId(){
+        int aux = 0;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "SELECT * FROM " + TABLE + " WHERE username='" + this.nombreUsuario + "'";
+            System.out.println("Sentencia SQL: " + sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                aux = rs.getInt("ID");
+                System.out.println(aux);
+                                
+                
+            }            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return aux;
+    }
+    
  
     
 }

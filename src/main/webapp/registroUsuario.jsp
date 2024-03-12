@@ -15,7 +15,7 @@
     <body>
         <div class="register-container">
             <h2>Registro de Usuarios</h2>
-            <form class="register-form" method="post" action="TestServlet">
+            <form class="register-form" method="post" action="UserServlet">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
