@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -59,7 +60,7 @@ public class Video {
         this.URLINFO = null;
     }  
     
-    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato){
+    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String url){
         this.autorID = autorId;
         this.titulo = titulo;
         this.autor = autor;
@@ -68,10 +69,9 @@ public class Video {
         this.descripcion = descripcion;
         this.formato = formato;
         this.reproducciones = 0;
-        this.URL = "aux de moment";
-        this.URLINFO="aux de moment";
-        System.out.println(System.getProperty("user. dir"));
-    
+        this.URL = url;
+        this.URLINFO="Video local";
+            
     }
     
     public boolean createVideo(){
@@ -128,9 +128,28 @@ public class Video {
                 rs.getDate("FECHA_CREACION"),
                 rs.getTime("DURACION"),
                 rs.getString("DESCRIPCION"),
-                rs.getString("FORMATO"));
+                rs.getString("FORMATO"),
+                rs.getString("URL"));
     }
      
+     
+    public boolean existsVideo(){
+        boolean result = false;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "SELECT COUNT(*) as COUNT FROM " + TABLE + " WHERE autorid=" + this.autorID + " AND titulo='" + this.titulo+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                result = (rs.getInt("COUNT") > 0);
+            }
+            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return result;
+    }
      
     public String getTitulo(){
         return this.titulo;
@@ -145,6 +164,13 @@ public class Video {
     }
     
     public Time getDuracion(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+        // Formatear la hora y mostrarla por pantalla
+        String formattedTime = sdf.format(this.duracion);
+        //System.out.println("Hora formateada: " + formattedTime);
+        //return formattedTime;
+        
         return this.duracion;
     }
     
@@ -154,5 +180,41 @@ public class Video {
     
     public String getDescripcion(){
         return this.descripcion;
+    }
+    
+    public int getId(){
+        int aux = 0;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "SELECT * FROM " + TABLE + " WHERE autorid=" + this.autorID + " AND titulo='" + this.titulo+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                aux = rs.getInt("ID");
+                System.out.println(aux);
+                                 
+            }
+            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return aux;
+    }
+    
+    public boolean delete(int videoId){
+        boolean result = false;
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            
+            String sql = "DELETE FROM " + TABLE + " WHERE ID=" + videoId;
+            System.out.println("Sentencia SQL: " + sql);
+            int filasAfectadas = stmt.executeUpdate(sql);
+            if(filasAfectadas > 0)result = true;
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return result;
     }
 }

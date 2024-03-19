@@ -7,6 +7,21 @@
  * Created: 11 mar 2024
  */
 
+
+
+CREATE TABLE USUARIOS
+(
+    "ID" INT not null primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+    "NOMBRE" VARCHAR(100) not null,
+    "APELLIDO" VARCHAR(100) not null,
+    "CORREO" VARCHAR(100) not null,
+    "USERNAME" VARCHAR(255) not null,
+    "PASSWORD" VARCHAR(255) not NULL
+);
+
+
 CREATE TABLE VIDEOS
 (
     "ID" INT not null primary key
