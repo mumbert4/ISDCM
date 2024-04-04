@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <button id="logoutButton">Logout</button>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
@@ -23,6 +24,7 @@
         <a href="subirVideo.jsp" class="add-button">Añadir nuevo video</a>
 
         <h2>Listado de Videos</h2>
+        <a href="busqueda.jsp"> Buscar Videos </a>
         <table>
             <thead>
                 <tr>
@@ -36,11 +38,10 @@
             </thead>
             <tbody>
                 <%
-                    ArrayList videosArray = (ArrayList) request.getSession().getAttribute("userVideos");
+                    ArrayList videosArray = (ArrayList) session.getAttribute("userVideos");
 
                     for (int i = 0; i < videosArray.size(); ++i){
                         Video video = (Video) videosArray.get(i);
-
                         out.println("<tr>");
                         out.println("<td>" + video.getTitulo() + "</td>"); 
                         out.println("<td>" + video.getAutor()+ "</td>"); 
@@ -49,10 +50,22 @@
                         out.println("<td>" + video.getReproducciones()+ "</td>"); 
                         out.println("<td>" + video.getDescripcion()+ "</td>"); 
                         out.println("</tr>");
-                        
                     }                                    
                 %>
             </tbody>
          </table>
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","UserServlet", true);
+            xhr.send();
+            console.log();
+            xhr.onload =  function() {if (xhr.status === 200){
+                console.log("LSODODSODS");
+                window.location.href = "login.jsp";
+        }};
+        });
+    
+    </script>
     </body>
 </html>
