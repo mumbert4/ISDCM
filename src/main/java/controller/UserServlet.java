@@ -162,12 +162,16 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession session = request.getSession(false);
+            String param1 = request.getParameter("param1");
+            if (param1 != null && param1 == "logout") {
+                    
+            HttpSession session = request.getSession();
             if (session != null){
                 session.invalidate();  
             }
+            
             System.out.println("Session finished");
-            response.setStatus(200);
+            response.setStatus(200);}
     }
     /**
      * Handles the HTTP <code>POST</code> method.

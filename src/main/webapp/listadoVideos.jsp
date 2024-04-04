@@ -57,11 +57,11 @@
     <script>
         document.getElementById("logoutButton").addEventListener("click", function(){
             var xhr = new XMLHttpRequest();
-            xhr.open("GET","UserServlet", true);
+            var url = 'UserServlet?param1=' + encodeURIComponent("logout")
+            xhr.open("GET",url, true);
             xhr.send();
             console.log();
             xhr.onload =  function() {if (xhr.status === 200){
-                console.log("LSODODSODS");
                 window.location.href = "login.jsp";
         }};
         });
