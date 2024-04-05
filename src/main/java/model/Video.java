@@ -74,6 +74,20 @@ public class Video {
             
     }
     
+    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato){
+        this.autorID = autorId;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.fecha = fecha;
+        this.duracion = duracion;
+        this.descripcion = descripcion;
+        this.formato = formato;
+        this.reproducciones = 0;
+        this.URL = "aux";
+        this.URLINFO="Video local";
+            
+    }
+    
     public boolean createVideo(){
         boolean result = false;
         try {

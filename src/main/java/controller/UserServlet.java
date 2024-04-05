@@ -95,6 +95,10 @@ public class UserServlet extends HttpServlet {
             
             session.setAttribute("username",username);
             session.setAttribute("userID", user.getId());
+            
+            Video aux = new Video();
+            ArrayList<Video> videos = aux.getVideos(user.getId());
+            session.setAttribute("userVideos", videos);
             //response.sendRedirect("listadoVideos.jsp");
             RequestDispatcher dispatcher = request.getRequestDispatcher("listadoVideos.jsp");
             dispatcher.forward(request, response);
