@@ -22,7 +22,7 @@ CREATE TABLE USUARIOS
 );
 
 
-CREATE TABLE VIDEOS
+CREATE TABLE VIDEOS2
 (
     "ID" INT not null primary key
         GENERATED ALWAYS AS IDENTITY
@@ -37,5 +37,5 @@ CREATE TABLE VIDEOS
     "FORMATO" VARCHAR(5) not null,
     "URL" VARCHAR(255) not null,
     "URL_INFO" VARCHAR(255) not null,
-    "STREAM" INT not null
+    "STREAM" INT Default 1 not null
 );
