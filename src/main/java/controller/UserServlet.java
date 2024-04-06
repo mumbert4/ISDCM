@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import jakarta.servlet.FilterChain;
 //import jakarta.servlet.http.HttpSession;
 import model.Usuario;
 import model.Video;
@@ -165,9 +166,17 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+            String param1 = request.getParameter("param1");
+            if (param1 != null && param1 == "logout") {
+                    
+            HttpSession session = request.getSession();
+            if (session != null){
+                session.invalidate();  
+            }
+            
+            System.out.println("Session finished");
+            response.setStatus(200);}
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *

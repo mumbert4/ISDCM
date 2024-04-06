@@ -83,7 +83,7 @@ public class ServletListado extends HttpServlet {
             
             Long aux = (long)(Double.parseDouble(timeString)*1000);//pasam a milisegons
             Time sqlTime = new Time(aux);
-            
+            String urlinfo = request.getParameter("urlinfo");
             
             
             Part filePart = request.getPart("videoFile");
@@ -103,7 +103,7 @@ public class ServletListado extends HttpServlet {
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
             }
-            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format);
+            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo);
             if(video.createVideo()){
                 System.out.println("Video añadido con exito");
                 HttpSession session = request.getSession();
@@ -130,6 +130,7 @@ public class ServletListado extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+  
     }
 
     /**

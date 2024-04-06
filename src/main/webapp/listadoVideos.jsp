@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
@@ -23,6 +24,7 @@
         <a href="subirVideo.jsp" class="add-button">Añadir nuevo video</a>
 
         <h2>Listado de Videos</h2>
+        <a href="busqueda.jsp"> Buscar Videos </a>
         <table>
             <thead>
                 <tr>
@@ -32,27 +34,52 @@
                     <th>Duración</th>
                     <th>Reproducciones</th>
                     <th>Descripción</th>
+                    <th>Streamable</th>
                 </tr>
             </thead>
             <tbody>
                 <%
-                    ArrayList videosArray = (ArrayList) request.getSession().getAttribute("userVideos");
+                    ArrayList videosArray = (ArrayList) session.getAttribute("userVideos");
 
                     for (int i = 0; i < videosArray.size(); ++i){
                         Video video = (Video) videosArray.get(i);
-
-                        out.println("<tr>");
-                        out.println("<td>" + video.getTitulo() + "</td>"); 
-                        out.println("<td>" + video.getAutor()+ "</td>"); 
-                        out.println("<td>" + video.getFecha()+ "</td>"); 
-                        out.println("<td>" + video.getDuracion()+ "</td>"); 
-                        out.println("<td>" + video.getReproducciones()+ "</td>"); 
-                        out.println("<td>" + video.getDescripcion()+ "</td>"); 
-                        out.println("</tr>");
-                        
+                %>
+                        <tr>
+                            <td><%= video.getTitulo() %></td>
+                            <td><%= video.getAutor() %></td>
+                            <td><%= video.getFecha() %></td>
+                            <td><%= video.getDuracion() %></td>
+                            <td><%= video.getReproducciones() %></td>
+                            <td><%= video.getDescripcion() %></td>
+                            <td>
+                                <button onclick="streamVideo('<%= video.getId() %>')">Stream</button>
+                            </td>
+                        </tr>
+                <%
                     }                                    
                 %>
             </tbody>
          </table>
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", function(){
+            var xhr = new XMLHttpRequest();
+            var url = 'UserServlet?param1=' + encodeURIComponent("logout")
+            xhr.open("GET",url, true);
+            xhr.send();
+            console.log();
+            xhr.onload =  function() {if (xhr.status === 200){
+                window.location.href = "login.jsp";
+        }};
+        });
+        
+        function streamVideo(videoId) {
+        // Aquí puedes realizar acciones con el ID del video, como abrir una ventana emergente de reproducción
+        console.log("ID del video: " + videoId);
+        // Por ejemplo:
+        // window.open("url_del_reproductor?id=" + videoId, "_blank");
+        }
+        
+    
+    </script>
     </body>
 </html>
