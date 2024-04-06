@@ -103,7 +103,7 @@ public class ServletListado extends HttpServlet {
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
             }
-            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo,true);
+            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo,1);
             if(video.createVideo()){
                 System.out.println("Video añadido con exito");
                 HttpSession session = request.getSession();
