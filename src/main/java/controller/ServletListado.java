@@ -103,7 +103,7 @@ public class ServletListado extends HttpServlet {
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
             }
-            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo);
+            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo,true);
             if(video.createVideo()){
                 System.out.println("Video añadido con exito");
                 HttpSession session = request.getSession();
@@ -116,7 +116,7 @@ public class ServletListado extends HttpServlet {
                 dispatcher.forward(request, response);
             }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -130,7 +130,6 @@ public class ServletListado extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-  
     }
 
     /**

@@ -44,7 +44,7 @@ public class Video {
     
     private String URL;
     private String URLINFO;
-    private int STREAM;
+    private Boolean STREAM;
     
     public Video(){
         this.id = -1;
@@ -58,10 +58,10 @@ public class Video {
         this.formato = null;
         this.URL = null;
         this.URLINFO = null;
-        this.STREAM = 0;
+        this.STREAM = true;
     }  
     
-    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String url){
+    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String url, Boolean stream){
         this.autorID = autorId;
         this.titulo = titulo;
         this.autor = autor;
@@ -72,11 +72,11 @@ public class Video {
         this.reproducciones = 0;
         this.URL = url;
         this.URLINFO="Video local";
-        this.STREAM=0;
+        this.STREAM=stream;
             
     }
     
-    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato){
+    public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String aux){
         this.autorID = autorId;
         this.titulo = titulo;
         this.autor = autor;
@@ -87,7 +87,6 @@ public class Video {
         this.reproducciones = 0;
         this.URL = "aux";
         this.URLINFO="Video local";
-        this.STREAM=0;
             
     }
     
@@ -99,12 +98,12 @@ public class Video {
             
             
             String sql = "INSERT INTO " + TABLE 
-                    + "(autorid, titulo, AUTOR, fecha_creacion, duracion, reproducciones, descripcion, formato, URL, URL_INFO, STREAM)"
+                    + "(autorid, titulo, AUTOR, fecha_creacion, duracion, reproducciones, descripcion, formato, URL, URL_INFO)"
                     + " VALUES (" + 
                     this.autorID + ", '" + this.titulo + "', '" + this.autor + 
                     "', '" + this.fecha + "', '" + this.duracion + "', " + this.reproducciones + 
                     ", '" + this.descripcion + "', '" + this.formato + "', '" + this.URL + 
-                    "', '" + this.URLINFO+"', "+ this.STREAM + ")";
+                    "', '" + this.URLINFO+"')";
             System.out.println("Sentencia SQL: " + sql);
             stmt.executeUpdate(sql);
             
@@ -146,7 +145,9 @@ public class Video {
                 rs.getTime("DURACION"),
                 rs.getString("DESCRIPCION"),
                 rs.getString("FORMATO"),
-                rs.getString("URL"));
+                rs.getString("URL"),
+                rs.getBoolean("STREAM"));
+        
     }
      
      
@@ -196,7 +197,7 @@ public class Video {
     }
     
     public String getStreamB(){
-        if (this.STREAM == 1){return "Unstream";}else{return "Stream";}
+        if (this.STREAM){return "Stream";}else{return "Unstream";}
     }
     public String getDescripcion(){
         return this.descripcion;

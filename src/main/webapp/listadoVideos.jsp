@@ -75,8 +75,7 @@
         function streamVideo(videoId) {
         // Aquí puedes realizar acciones con el ID del video, como abrir una ventana emergente de reproducción
         console.log("ID del video: " + videoId);
-        // Por ejemplo:
-        // window.open("url_del_reproductor?id=" + videoId, "_blank");
+        window.location.href = 'ServletListado?videoId=' + videoId;
         }
         
     
