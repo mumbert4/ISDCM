@@ -34,6 +34,7 @@
                     <th>Duración</th>
                     <th>Reproducciones</th>
                     <th>Descripción</th>
+                    <th>Streamable</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,14 +43,19 @@
 
                     for (int i = 0; i < videosArray.size(); ++i){
                         Video video = (Video) videosArray.get(i);
-                        out.println("<tr>");
-                        out.println("<td>" + video.getTitulo() + "</td>"); 
-                        out.println("<td>" + video.getAutor()+ "</td>"); 
-                        out.println("<td>" + video.getFecha()+ "</td>"); 
-                        out.println("<td>" + video.getDuracion()+ "</td>"); 
-                        out.println("<td>" + video.getReproducciones()+ "</td>"); 
-                        out.println("<td>" + video.getDescripcion()+ "</td>"); 
-                        out.println("</tr>");
+                %>
+                        <tr>
+                            <td><%= video.getTitulo() %></td>
+                            <td><%= video.getAutor() %></td>
+                            <td><%= video.getFecha() %></td>
+                            <td><%= video.getDuracion() %></td>
+                            <td><%= video.getReproducciones() %></td>
+                            <td><%= video.getDescripcion() %></td>
+                            <td>
+                                <button onclick="streamVideo('<%= video.getId() %>')">Stream</button>
+                            </td>
+                        </tr>
+                <%
                     }                                    
                 %>
             </tbody>
@@ -65,6 +71,14 @@
                 window.location.href = "login.jsp";
         }};
         });
+        
+        function streamVideo(videoId) {
+        // Aquí puedes realizar acciones con el ID del video, como abrir una ventana emergente de reproducción
+        console.log("ID del video: " + videoId);
+        // Por ejemplo:
+        // window.open("url_del_reproductor?id=" + videoId, "_blank");
+        }
+        
     
     </script>
     </body>
