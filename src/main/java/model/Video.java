@@ -44,7 +44,7 @@ public class Video {
     
     private String URL;
     private String URLINFO;
-    private int STREAM;
+    private Boolean STREAM;
     
     public Video(){
         this.id = -1;
@@ -58,10 +58,14 @@ public class Video {
         this.formato = null;
         this.URL = null;
         this.URLINFO = null;
+
         this.STREAM = 1;
     }  
     
+
+    
     public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String url, int stream){
+
         this.autorID = autorId;
         this.titulo = titulo;
         this.autor = autor;
@@ -146,7 +150,10 @@ public class Video {
                 rs.getString("DESCRIPCION"),
                 rs.getString("FORMATO"),
                 rs.getString("URL"),
+
                 rs.getInt("STREAM"));
+
+
         
     }
      
@@ -197,7 +204,10 @@ public class Video {
     }
     
     public String getStreamB(){
+
         if (this.STREAM==1){return "Stream";}else{return "Unstream";}
+
+
     }
     public String getDescripcion(){
         return this.descripcion;
