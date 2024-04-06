@@ -37,5 +37,5 @@ CREATE TABLE VIDEOS
     "FORMATO" VARCHAR(5) not null,
     "URL" VARCHAR(255) not null,
     "URL_INFO" VARCHAR(255) not null,
-    "STREAM" BOOLEAN DEFAULT TRUE not null
+    "STREAM" INT not null
 );

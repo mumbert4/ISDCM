@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
+    <button id = "logoutButton">Logout</button> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
@@ -52,7 +52,7 @@
                             <td><%= video.getReproducciones() %></td>
                             <td><%= video.getDescripcion() %></td>
                             <td>
-                                <button onclick="streamVideo('<%= video.getId() %>')">Stream</button>
+                                <button onclick="streamVideo('<%= video.getId() %>')"><%= video.getStreamB()%></button>
                             </td>
                         </tr>
                 <%
@@ -63,12 +63,12 @@
     <script>
         document.getElementById("logoutButton").addEventListener("click", function(){
             var xhr = new XMLHttpRequest();
-            var url = 'UserServlet?param1=' + encodeURIComponent("logout")
+            var url = 'UserServlet?param1=' + encodeURIComponent("logout");
             xhr.open("GET",url, true);
             xhr.send();
-            console.log();
+            console.log("FUNCIONE");
             xhr.onload =  function() {if (xhr.status === 200){
-                window.location.href = "login.jsp";
+                window.location.href = "busqueda.jsp";
         }};
         });
         

@@ -44,7 +44,7 @@ public class Video {
     
     private String URL;
     private String URLINFO;
-    
+    private int STREAM;
     
     public Video(){
         this.id = -1;
@@ -58,6 +58,7 @@ public class Video {
         this.formato = null;
         this.URL = null;
         this.URLINFO = null;
+        this.STREAM = 0;
     }  
     
     public Video(int autorId, String titulo, String autor, Date fecha, Time duracion, String descripcion, String formato, String url){
@@ -71,6 +72,7 @@ public class Video {
         this.reproducciones = 0;
         this.URL = url;
         this.URLINFO="Video local";
+        this.STREAM=0;
             
     }
     
@@ -85,6 +87,7 @@ public class Video {
         this.reproducciones = 0;
         this.URL = "aux";
         this.URLINFO="Video local";
+        this.STREAM=0;
             
     }
     
@@ -96,12 +99,12 @@ public class Video {
             
             
             String sql = "INSERT INTO " + TABLE 
-                    + "(autorid, titulo, AUTOR, fecha_creacion, duracion, reproducciones, descripcion, formato, URL, URL_INFO)"
+                    + "(autorid, titulo, AUTOR, fecha_creacion, duracion, reproducciones, descripcion, formato, URL, URL_INFO, STREAM)"
                     + " VALUES (" + 
                     this.autorID + ", '" + this.titulo + "', '" + this.autor + 
                     "', '" + this.fecha + "', '" + this.duracion + "', " + this.reproducciones + 
                     ", '" + this.descripcion + "', '" + this.formato + "', '" + this.URL + 
-                    "', '" + this.URLINFO+ "')";
+                    "', '" + this.URLINFO+"', "+ this.STREAM + ")";
             System.out.println("Sentencia SQL: " + sql);
             stmt.executeUpdate(sql);
             
@@ -192,6 +195,9 @@ public class Video {
         return this.reproducciones;
     }
     
+    public String getStreamB(){
+        if (this.STREAM == 1){return "Unstream";}else{return "Stream";}
+    }
     public String getDescripcion(){
         return this.descripcion;
     }

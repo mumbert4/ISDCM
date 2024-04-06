@@ -167,10 +167,9 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String param1 = request.getParameter("param1");
-            if (param1 != null && param1 == "logout") {
-                    
-            HttpSession session = request.getSession();
-            if (session != null){
+            if (param1 != null && param1.equals("logout")) {
+                HttpSession session = request.getSession();
+                if (session != null){
                 session.invalidate();  
             }
             
