@@ -7,68 +7,29 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Videos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        #search-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-        #search-container input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        #search-container input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #result-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        #result-container iframe {
-            width: 800px;
-            height: 450px;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Videos</title>
+        <link rel="stylesheet" href="reproduccion.css">
+        <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    </head>
 <body>
 
-<header>
-    <h1>Search Videos</h1>
-</header>
+    <h1>Reproducción de Video</h1>
+    <%-- Obtener el ID del video de los parámetros de la URL --%>
+    <% Video video = (Video)request.getParameter("video"); 
+    %>
+    <video id="my-video" class="video-js" controls preload="auto" width="640" height="360">
+        <source src="<%= video.getUrl() %>" type="video/mp4">
+        <!-- Otros formatos de video aquí -->
+    </video>
+    <script>
+        // Inicializar el reproductor de video
+        var player = videojs('my-video', {
+            fluid: true // Hacer que el reproductor sea responsive
+        });
+    </script>
 
-<div id="search-container">
-    <form id="search-form">
-        <input type="text" id="search-input" placeholder="Enter video keywords...">
-        <input type="submit" value="Search">
-    </form>
-</div>
-
-<div id="result-container">
-    <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
-</div>
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </body>
-</

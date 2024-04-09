@@ -90,6 +90,31 @@ public class Video {
             
     }
     
+    public Video(int id){
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+
+            String sql = "SELECT * FROM " + TABLE + " WHERE ID=" + id;
+            System.out.println("Sentencia SQL: " + sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                // Si se encontró un video con el ID dado, crear un objeto Video con los datos correspondientes
+                this.id = rs.getInt("ID");
+                this.titulo = rs.getString("titulo");
+                this.autor = rs.getString("autor");
+                this.fecha = rs.getDate("fecha_creacion");
+                this.duracion = rs.getTime("duracion");
+                this.descripcion = rs.getString("descripcion");
+                this.formato = rs.getString("formato");
+                this.URL = rs.getString("url");
+                this.reproducciones = rs.getInt("reproducciones");
+            }            
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+    
     public boolean createVideo(){
         boolean result = false;
         try {
@@ -238,4 +263,10 @@ public class Video {
         }
         return result;
     }
+    
+    public String getUrl(){
+        return this.URL;
+    }
+    
+   
 }

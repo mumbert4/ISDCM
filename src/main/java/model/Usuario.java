@@ -47,7 +47,6 @@ public class Usuario {
     
     public Usuario(String nombre, String apellidos, String email, String nombreUsuario, String password){
         
-        System.out.println("Cargando nuevo usuario: " + nombre + " - " + apellidos);
         
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -137,7 +136,6 @@ public class Usuario {
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 aux = rs.getInt("ID");
-                System.out.println(aux);
                                 
                 
             }            

@@ -97,13 +97,13 @@ public class ServletListado extends HttpServlet {
             else{
                 System.out.println("Directorio ya existe");
             }
-            
-            Path filePath = path.resolve(fileName);
+            String userName = (String)request.getSession().getAttribute("username");
+            Path filePath = path.resolve(userName+'/'+name+'.'+format);
             System.out.println("filePath: " + filePath.toString());
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
             }
-            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, urlinfo,true);
+            Video video = new Video(authorId, name, author, fechaSQL, sqlTime, description, format, filePath.toString(),true);
             if(video.createVideo()){
                 System.out.println("Video añadido con exito");
                 HttpSession session = request.getSession();

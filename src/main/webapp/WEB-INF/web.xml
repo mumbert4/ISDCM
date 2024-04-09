@@ -4,9 +4,17 @@
         <servlet-name>RESTservlet</servlet-name>
         <servlet-class>controller.RESTservlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletReproduccion</servlet-name>
+        <servlet-class>controller.ServletReproduccion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RESTservlet</servlet-name>
         <url-pattern>/RESTservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletReproduccion</servlet-name>
+        <url-pattern>/ServletReproduccion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
